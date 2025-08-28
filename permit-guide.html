@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Apply for a Permit - New Rochelle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #64748b;
+        }
+
+        .stepper {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 25px;
+            top: 60px;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: #e2e8f0;
+            z-index: 0;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-content {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+        }
+
+        .step-description {
+            color: #475569;
+            margin-bottom: 1rem;
+        }
+
+        .step-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .requirements-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .requirements-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .requirements-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .warning {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .warning-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip {
+            background: #dbeafe;
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tip-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .step {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .step-number {
+                margin-bottom: 1rem;
+            }
+            
+            .step:not(:last-child)::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Apply for a Permit</h1>
+            <p>Follow these simple steps to submit your permit application in New Rochelle</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="stepper">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3 class="step-title">Access the Permit System</h3>
+                    <p class="step-description">Start your application by accessing the city's online permit portal.</p>
+                    
+                    <div class="tip">
+                        <div class="tip-title">💡 Pro Tip</div>
+                        <p>If you had an account with the old system, use the same email address to maintain your application history.</p>
+                    </div>
+
+                    <ul class="requirements-list">
+                        <li>Valid email address for account registration</li>
+                        <li>Basic property information ready</li>
+                    </ul>
+
+                    <div class="step-actions">
+                        <a href="#" class="btn btn-primary">Go to CitySquared Portal</a>
+                        <button class="btn btn-secondary" onclick="markStepComplete(1)">Mark Complete</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3 class="step-title">Register or Login</h3>
+                    <p class="step-description">Create your account or sign in to access the permit application system.</p>
+                    
+                    <ul class="requirements-list">
+                        <li>Search for "City of New Rochelle" in the Municipality field</li>
+                        <li>Complete your profile with accurate contact information</li>
+                        <li>Verify your email address</li>
+                    </ul>
+
+                    <div class="step-actions">
+                        <button class="btn btn-secondary" onclick="markStepComplete(2)">Mark Complete</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3 class="step-title">Start Your Application</h3>
+                    <p class="step-description">Navigate to the Buildings department and select your permit type.</p>
+                    
+                    <div class="warning">
+                        <div class="warning-title">⚠️ Important</div>
+                        <p>Make sure to select the correct permit type as this affects the required documentation and review process.</p>
+                    </div>
+
+                    <ul class="requirements-list">
+                        <li>Choose "Buildings" department</li>
+                        <li>Select appropriate permit type</li>
+                        <li>Have project details ready</li>
+                    </ul>
+
+                    <div class="step-actions">
+                        <button class="btn btn-secondary" onclick="markStepComplete(3)">Mark Complete</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3 class="step-title">Complete Application Details</h3>
+                    <p class="step-description">Fill out all required sections of your permit application.</p>
+                    
+                    <div class="tip">
+                        <div class="tip-title">💡 Search Tip</div>
+                        <p>When searching for your property, use minimal information (like just the house number) for better results.</p>
+                    </div>
+
+                    <ul class="requirements-list">
+                        <li><strong>Property Search:</strong> Locate and verify your property</li>
+                        <li><strong>Add Contacts:</strong> Include architect, contractor, and other professionals</li>
+                        <li><strong>Building Details:</strong> Provide comprehensive project information</li>
+                        <li><strong>Insurance Information:</strong> Upload valid insurance certificates</li>
+                        <li><strong>Upload Documents:</strong> Submit plans, drawings, and supporting materials</li>
+                    </ul>
+
+                    <div class="step-actions">
+                        <button class="btn btn-secondary" onclick="markStepComplete(4)">Mark Complete</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3 class="step-title">Review & Submit</h3>
+                    <p class="step-description">Double-check all information before final submission.</p>
+                    
+                    <div class="warning">
+                        <div class="warning-title">⚠️ Before You Submit</div>
+                        <p>Review all sections carefully. Once submitted, some changes may require starting a new application or paying amendment fees.</p>
+                    </div>
+
+                    <ul class="requirements-list">
+                        <li>Verify all contact information is accurate</li>
+                        <li>Confirm all required documents are uploaded</li>
+                        <li>Review building details and project scope</li>
+                        <li>Check insurance certificates are current</li>
+                    </ul>
+
+                    <div class="step-actions">
+                        <button class="btn btn-primary" onclick="markStepComplete(5)">Submit Application</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h3 class="step-title">Track Your Application</h3>
+                    <p class="step-description">Monitor your application status and respond to any requests from the city.</p>
+                    
+                    <ul class="requirements-list">
+                        <li>Save your application confirmation number</li>
+                        <li>Access your dashboard to track progress</li>
+                        <li>Respond promptly to any city requests</li>
+                        <li>Apply for amendments if needed</li>
+                        <li>Request Certificate of Occupancy when ready</li>
+                    </ul>
+
+                    <div class="step-actions">
+                        <a href="#" class="btn btn-primary">View Dashboard</a>
+                        <button class="btn btn-secondary" onclick="markStepComplete(6)">Mark Complete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let completedSteps = 0;
+        const totalSteps = 6;
+
+        function markStepComplete(stepNumber) {
+            const step = document.querySelector(`.step:nth-child(${stepNumber})`);
+            const stepNumber_elem = step.querySelector('.step-number');
+            
+            if (!stepNumber_elem.classList.contains('completed')) {
+                stepNumber_elem.style.background = '#10b981';
+                stepNumber_elem.innerHTML = '✓';
+                stepNumber_elem.classList.add('completed');
+                completedSteps++;
+                updateProgress();
+            }
+        }
+
+        function updateProgress() {
+            const progressFill = document.getElementById('progressFill');
+            const percentage = (completedSteps / totalSteps) * 100;
+            progressFill.style.width = percentage + '%';
+        }
+
+        // Auto-scroll to next incomplete step
+        function scrollToNextStep() {
+            const nextStep = document.querySelector(`.step:nth-child(${completedSteps + 1})`);
+            if (nextStep) {
+                nextStep.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Add click handlers to automatically scroll to next step after marking complete
+        document.querySelectorAll('button[onclick^="markStepComplete"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                setTimeout(scrollToNextStep, 500);
+            });
+        });
+    </script>
+</body>
+</html>
